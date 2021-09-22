@@ -1,0 +1,76 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: mysql_c
+    image: ${MYSQL_IMAGE}
+    volumes:
+    - type: volume
+      source: drupaldatabase
+      target: /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - milocal
+
+  nginx:
+    container_name: nginx_c
+    image: ${NGINX_IMAGE}
+    volumes:
+    - type: volume
+      source: staticfiles
+      target: /var/www/html
+    environment:
+      NGINX_BACKEND_PORT: 9000
+      NGINX_SERVER_NAME: localhost
+      NGINX_BACKEND_HOST: php
+      PROJECT_NAME: ${PROJECT_NAME}
+    networks:
+      - milocal
+    ports:
+     - 80:80
+     - 443:443
+    depends_on:
+      - "php"
+
+  php:
+    container_name: drupal_c
+    image: ${DRUPAL_IMAGE}
+    volumes:
+    - type: volume
+      source: staticfiles
+      target: /opt/drupal/web
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: mysql_c
+      MYSQL_PORT: 3306
+      PROJECT_NAME: ${PROJECT_NAME}
+      PROJECT_BASE_DOMAIN: ${PROJECT_BASE_DOMAIN}
+    networks:
+      - milocal
+    depends_on:
+      - "db"
+
+volumes:
+  staticfiles:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./storage/files
+      o: bind
+  drupaldatabase:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./storage/mysql
+      o: bind
+
+networks:
+  milocal:
+    driver: bridge
+
