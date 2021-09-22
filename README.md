@@ -8,10 +8,34 @@ Montar una web con Drupal
 * Base de datos MySQL
 * Drupal con PHP-FPM
 
+## Requisitos 
 
-## Drupal desde navegador 
+- Docker y Docker Compose instalados
 
-![images.png](/images/misitio.png)
+## Clonar el repositorio 
+
+```shell 
+https://github.com/CeliaGMqrz/drupal_nginx_basic.git
+```
+
+## Crear el directorio de datos 
+
+```shell 
+mkdir -p storage/files storage/mysql
+```
+## Cargar las variables de entorno 
+
+No te olvides de modificar las variables para tu proyecto.
+
+Ubicado en el fichero `.env`
+
+## Desplegar el entorno 
+
+Lanzamos docker-compose up, en el directorio principal donde se encuentra el fichero yml
+
+```shell
+docker-compose up -d
+```
 
 ## Contenedores en funcionamiento:
 
@@ -22,6 +46,10 @@ CONTAINER ID   IMAGE              COMMAND                  CREATED          STAT
 a39156429bce   cgmarquez95/dp     "docker-php-entrypoi…"   11 minutes ago   Up 11 minutes   9000/tcp                                                                   drupal_c
 f609adefcaa4   cgmarquez95/mybd   "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   3306/tcp, 33060/tcp                                                        mysql_c
 ```
+
+## Drupal desde navegador 
+
+![images.png](/images/misitio.png)
 
 Puntos de montaje:
 
