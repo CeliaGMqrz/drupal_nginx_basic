@@ -1,6 +1,6 @@
 # Web Drupal (Nginx, Drupal+php-fpm y MySQL) en Docker 
 
-## Objetivo:
+### Objetivo:
 
 Montar una web con Drupal
 
@@ -8,28 +8,28 @@ Montar una web con Drupal
 * Base de datos MySQL
 * Drupal con PHP-FPM
 
-## Requisitos 
+### Requisitos 
 
 - Docker y Docker Compose instalados
 
-## Clonar el repositorio 
+### Clonar el repositorio 
 
 ```shell 
 https://github.com/CeliaGMqrz/drupal_nginx_basic.git
 ```
 
-## Crear el directorio de datos 
+### Crear el directorio de datos 
 
 ```shell 
 mkdir -p storage/files storage/mysql
 ```
-## Cargar las variables de entorno 
+### Cargar las variables de entorno 
 
 No te olvides de modificar las variables para tu proyecto.
 
 Ubicado en el fichero `.env`
 
-## Desplegar el entorno 
+### Desplegar el entorno 
 
 Lanzamos docker-compose up, en el directorio principal donde se encuentra el fichero yml
 
@@ -37,7 +37,7 @@ Lanzamos docker-compose up, en el directorio principal donde se encuentra el fic
 docker-compose up -d
 ```
 
-## Contenedores en funcionamiento:
+### Contenedores en funcionamiento:
 
 ```shell
 cgarcia@ws-cgarcia:~/github/drupal_nginx_basic$ docker ps 
@@ -47,7 +47,7 @@ a39156429bce   cgmarquez95/dp     "docker-php-entrypoi…"   11 minutes ago   Up
 f609adefcaa4   cgmarquez95/mybd   "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   3306/tcp, 33060/tcp                                                        mysql_c
 ```
 
-## Drupal desde navegador 
+### Drupal desde navegador 
 
 ![images.png](/images/misitio.png)
 
